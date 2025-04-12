@@ -36,7 +36,7 @@ server {
         include fastcgi_params;
     }
 }
-
+```
 ![image](https://github.com/user-attachments/assets/60bdfb07-2ecf-4ddc-a23c-64b4c4ae2b69)
 
 
