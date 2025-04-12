@@ -44,8 +44,9 @@ server {
    - Создан контейнер **backend** на базе образа **php:7.4-fpm**, где монтируется директория **mounts/site** для хранения PHP-файлов.
    - Создан контейнер **frontend** на базе образа **nginx:1.23-alpine**, с настройками для работы с PHP через **nginx/default.conf**.
    - Оба контейнера работают в одной сети **internal**, что позволяет им обмениваться данными.
-   
-   ![Docker контейнеры](path_to_screenshot_3)
+   - 
+![image](https://github.com/user-attachments/assets/632ab523-226b-4809-81e3-3ffada5769b0)
+
 
 4. **Запуск и проверка работы**
    - Контейнеры были запущены командой `docker-compose up -d`.
