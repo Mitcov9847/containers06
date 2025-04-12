@@ -18,14 +18,17 @@
 2. **Создание конфигурации для Nginx**
    - Создали файл конфигурации **nginx/default.conf**, в котором указали настройки для Nginx, включая проброс PHP-запросов на контейнер с PHP-FPM.
    Создайте в директории containers05 файл nginx/default.conf со следующим содержимым:
+```nginx
 server {
     listen 80;
     server_name _;
     root /var/www/html;
     index index.php;
+    
     location / {
         try_files $uri $uri/ /index.php?$args;
     }
+
     location ~ \.php$ {
         fastcgi_pass backend:9000;
         fastcgi_index index.php;
