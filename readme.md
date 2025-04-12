@@ -15,12 +15,27 @@
    - В директории **containers06** создали поддиректорию **mounts/site**, куда перенесли PHP-сайт.
    - Создали файл **.gitignore**, чтобы исключить файлы из директории **mounts/site** от коммитов в репозиторий.
    
-
 2. **Создание конфигурации для Nginx**
    - Создали файл конфигурации **nginx/default.conf**, в котором указали настройки для Nginx, включая проброс PHP-запросов на контейнер с PHP-FPM.
-   - Конфигурация включает правила для обработки обычных HTTP-запросов и для передачи PHP-запросов на контейнер **backend** (PHP-FPM).
-   
-   ![Конфигурация Nginx](path_to_screenshot_2)
+   Создайте в директории containers05 файл nginx/default.conf со следующим содержимым:
+server {
+    listen 80;
+    server_name _;
+    root /var/www/html;
+    index index.php;
+    location / {
+        try_files $uri $uri/ /index.php?$args;
+    }
+    location ~ \.php$ {
+        fastcgi_pass backend:9000;
+        fastcgi_index index.php;
+        fastcgi_param SCRIPT_FILENAME $document_root$fastcgi_script_name;
+        include fastcgi_params;
+    }
+}
+
+![image](https://github.com/user-attachments/assets/60bdfb07-2ecf-4ddc-a23c-64b4c4ae2b69)
+
 
 3. **Создание Docker-контейнеров**
    - Создан контейнер **backend** на базе образа **php:7.4-fpm**, где монтируется директория **mounts/site** для хранения PHP-файлов.
